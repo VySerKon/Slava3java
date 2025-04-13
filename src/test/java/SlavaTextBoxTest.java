@@ -25,6 +25,10 @@ public class SlavaTextBoxTest {
         $("#userEmail").setValue("3");
         $("label[for='gender-radio-1']").click();
         $("#userNumber").setValue("4");
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").$$("option").findBy(text("January")).click();
+        $(".react-datepicker__year-select").$$("option").findBy(text("1999")).click();
+        $(".react-datepicker__month .react-datepicker__week:nth-child(5)").$$("div").findBy(text("26")).click();
         $("label[for='hobbies-checkbox-3']").click();
         $("#subjectsInput").click();
         $("#subjectsInput").setValue("Math");
@@ -34,7 +38,10 @@ public class SlavaTextBoxTest {
     }
 }
 
-
+//id="dateOfBirthInput"
+//react-datepicker__month-select
+//react-datepicker__year-select
+//react-datepicker__week
 //$("label[for='hobbies-checkbox-3']").shouldHave(text("ru.selenide.org"));
 
 //ChromeOptions options = new ChromeOptions();

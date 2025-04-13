@@ -12,25 +12,23 @@ public class SlavaTextBoxTest {
 
     @BeforeAll
     static void setup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        Configuration.browserCapabilities = options;
+        Configuration.baseUrl = "https://demoqa.com";
         Configuration.timeout = 30000;
         Configuration.pageLoadTimeout = 60000;
     }
 
     @Test
     void fillFormTest() {
-        open("https://demoqa.com/automation-practice-form");
+        open("/automation-practice-form");
         $("#firstName").setValue("1");
         $("#lastName").setValue("2");
         $("#userEmail").setValue("3");
         $("label[for='gender-radio-1']").click();
         $("#userNumber").setValue("4");
         $("label[for='hobbies-checkbox-3']").click();
-        $("#subjectsContainer").setValue("5");
+        $("#subjectsInput").click();
+        $("#subjectsInput").setValue("Math");
+        $(".subjects-auto-complete__menu").$$("div").findBy(text("Math")).click();
         $("#submit").click();
         closeWindow();
     }
@@ -38,3 +36,17 @@ public class SlavaTextBoxTest {
 
 
 //$("label[for='hobbies-checkbox-3']").shouldHave(text("ru.selenide.org"));
+
+//ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-gpu");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
+//Configuration.browserCapabilities = options;
+
+//$("#subjectsInput").click();
+//$("#subjectsInput").setValue("Math");
+//$(".subjects-auto-complete__menu").$$("div").findBy(text("Math")).click();
+
+//$("#subjectsInput").click();
+//$("#subjectsInput").setValue("Math");
+//$(".subjects-auto-complete__menu").$("div=Math").click();

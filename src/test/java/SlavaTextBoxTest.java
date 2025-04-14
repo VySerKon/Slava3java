@@ -1,3 +1,5 @@
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,24 +24,35 @@ public class SlavaTextBoxTest {
     @Test
     void fillFormTest() {
         open("/automation-practice-form");
-        $("#firstName").setValue("1");
-        $("#lastName").setValue("2");
-        $("#userEmail").setValue("3");
+        $("#firstName").setValue("Kotik");
+        $("#lastName").setValue("Krasiviy");
+        $("#userEmail").setValue("kotik@kotik.catq");
         $("label[for='gender-radio-1']").click();
-        $("#userNumber").setValue("4");
+        $("#userNumber").setValue("9998887766");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").$$("option").findBy(text("January")).click();
-        $(".react-datepicker__year-select").$$("option").findBy(text("1999")).click();
+        $(".react-datepicker__month-select").selectOption("January");
+        $(".react-datepicker__year-select").selectOption("1999");
         $(".react-datepicker__month .react-datepicker__week:nth-child(5)").$$("div").findBy(text("26")).click();
         $("label[for='hobbies-checkbox-3']").click();
         $("#subjectsInput").click();
         $("#subjectsInput").setValue("Math");
         $(".subjects-auto-complete__menu").$$("div").findBy(text("Math")).click();
         $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
+        $("#currentAddress-wrapper #currentAddress").setValue("address null");
+        $(".css-1wa3eu0-placeholder").click();
+        $(".css-2613qy-menu").$$("div").findBy(text("Uttar Pradesh")).click();
         $("#submit").click();
-        closeWindow();
+    }
+    @AfterEach
+    void afterEach() {
+        Selenide.closeWebDriver();
     }
 }
+
+
+//css-2b097c-container
+//css-2613qy-menu
+
 
 //id="dateOfBirthInput"
 //react-datepicker__month-select
@@ -60,3 +73,7 @@ public class SlavaTextBoxTest {
 //$("#subjectsInput").click();
 //$("#subjectsInput").setValue("Math");
 //$(".subjects-auto-complete__menu").$("div=Math").click();
+
+//$(".react-datepicker__month-select").$$("option").findBy(text("January")).click();
+//$(".react-datepicker__year-select").$$("option").findBy(text("1999")).click();
+//$(".react-datepicker__month .react-datepicker__week:nth-child(5)").$$("div").findBy(text("26")).click();

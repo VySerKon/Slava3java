@@ -13,6 +13,8 @@ public class SlavaTextBoxTest {
     @BeforeAll
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.holdBrowserOpen = true;
         Configuration.timeout = 30000;
         Configuration.pageLoadTimeout = 60000;
     }
@@ -33,6 +35,7 @@ public class SlavaTextBoxTest {
         $("#subjectsInput").click();
         $("#subjectsInput").setValue("Math");
         $(".subjects-auto-complete__menu").$$("div").findBy(text("Math")).click();
+        $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
         $("#submit").click();
         closeWindow();
     }

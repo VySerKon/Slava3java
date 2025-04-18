@@ -17,7 +17,7 @@ public class SlavaTextBoxTest {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 30000;
+        Configuration.timeout = 30000; //без задержек тест падает по таймауту, браузер долго открывается
         Configuration.pageLoadTimeout = 60000;
     }
 
@@ -39,8 +39,10 @@ public class SlavaTextBoxTest {
         $(".subjects-auto-complete__menu").$$("div").findBy(text("Math")).click();
         $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
         $("#currentAddress-wrapper #currentAddress").setValue("address null");
-        $(".css-1wa3eu0-placeholder").click();
-        $(".css-2613qy-menu").$$("div").findBy(text("Uttar Pradesh")).click();
+        $("#state").click();
+        $("#react-select-3-input").setValue("NCR").pressEnter();
+        $("#city").click();
+        $("#react-select-4-input").setValue("Delhi").pressEnter();
         $("#submit").click();
     }
     @AfterEach

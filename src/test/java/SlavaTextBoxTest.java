@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 import com.codeborne.selenide.Configuration;
@@ -16,9 +17,9 @@ public class SlavaTextBoxTest {
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 30000; //без задержек тест падает по таймауту, браузер долго открывается
-        Configuration.pageLoadTimeout = 60000;
+        Configuration.holdBrowserOpen = false;
+        //Configuration.timeout = 30000;
+        //Configuration.pageLoadTimeout = 60000;
     }
 
     @Test
@@ -27,23 +28,33 @@ public class SlavaTextBoxTest {
         $("#firstName").setValue("Kotik");
         $("#lastName").setValue("Krasiviy");
         $("#userEmail").setValue("kotik@kotik.catq");
-        $("label[for='gender-radio-1']").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("9998887766");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("January");
         $(".react-datepicker__year-select").selectOption("1999");
-        $(".react-datepicker__month .react-datepicker__week:nth-child(5)").$$("div").findBy(text("26")).click();
-        $("label[for='hobbies-checkbox-3']").click();
+        $(".react-datepicker__month").$(byText("26")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
         $("#subjectsInput").click();
-        $("#subjectsInput").setValue("Math");
-        $(".subjects-auto-complete__menu").$$("div").findBy(text("Math")).click();
+        $("#subjectsInput").setValue("Math").pressEnter();
         $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
-        $("#currentAddress-wrapper #currentAddress").setValue("address null");
+        $("#currentAddress").setValue("address null");
         $("#state").click();
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#city").click();
         $("#react-select-4-input").setValue("Delhi").pressEnter();
         $("#submit").click();
+
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Kotik Krasiviy"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("kotik@kotik.catq"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9998887766"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("26 January,1999"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Math"));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Music"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("TestBox1.JPG"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("address null"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
     }
     @AfterEach
     void afterEach() {

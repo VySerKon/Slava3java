@@ -18,8 +18,6 @@ public class SlavaTextBoxTest {
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = false;
-        Configuration.headless = true;
         Configuration.browser = "chrome";
     }
 

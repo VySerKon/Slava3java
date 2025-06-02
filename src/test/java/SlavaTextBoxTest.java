@@ -25,6 +25,9 @@ public class SlavaTextBoxTest {
     @Test
     void fillFormTest() {
         open("/automation-practice-form");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Kotik");
         $("#lastName").setValue("Krasiviy");
         $("#userEmail").setValue("kotik@kotik.catq");

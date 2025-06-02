@@ -1,4 +1,6 @@
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
@@ -21,6 +23,7 @@ public class SlavaTextBoxTest {
         Configuration.browser = "chrome";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.browserSize = "1920x1080";
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
     @Test
     void fillFormTest() {

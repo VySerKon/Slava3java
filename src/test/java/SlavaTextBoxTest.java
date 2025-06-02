@@ -20,6 +20,7 @@ public class SlavaTextBoxTest {
         Configuration.pageLoadStrategy = "eager";
         Configuration.browser = "chrome";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.browserSize = "1920x1080";
     }
     @Test
     void fillFormTest() {

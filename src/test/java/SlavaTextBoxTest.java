@@ -21,7 +21,6 @@ public class SlavaTextBoxTest {
         Configuration.browser = "chrome";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
-
     @Test
     void fillFormTest() {
         open("/automation-practice-form");

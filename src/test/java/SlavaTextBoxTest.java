@@ -48,7 +48,8 @@ public class SlavaTextBoxTest {
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
         $("#currentAddress").setValue("address null");
-        $("#state").click();
+        $("#state").scrollIntoView(true).click();
+        //$("#state").click();
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#city").click();
         $("#react-select-4-input").setValue("Delhi").pressEnter();

@@ -1,4 +1,4 @@
-import com.codeborne.selenide.Selenide;
+
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
+
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -38,41 +40,47 @@ public class SlavaTextBoxTest {
 
     @Test
     void fillFormTest() {
-        open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        $("#firstName").setValue("Kotik");
-        $("#lastName").setValue("Krasiviy");
-        $("#userEmail").setValue("kotik@kotik.catq");
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue("9998887766");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption("January");
-        $(".react-datepicker__year-select").selectOption("1999");
-        $(".react-datepicker__month").$(byText("26")).click();
-        $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#subjectsInput").click();
-        $("#subjectsInput").setValue("Math").pressEnter();
-        $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
-        $("#currentAddress").setValue("address null");
-        $("#state").scrollIntoView(true).click();
-        //$("#state").click();
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        $("#city").click();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
-        $("#submit").click();
+        step("Open", () -> {
+                    open("/automation-practice-form");
+                    $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+                    executeJavaScript("$('#fixedban').remove()");
+                    executeJavaScript("$('footer').remove()");
+                });
+        step("Fill form", () -> {
+                    $("#firstName").setValue("Kotik");
+                    $("#lastName").setValue("Krasiviy");
+                    $("#userEmail").setValue("kotik@kotik.catq");
+                    $("#genterWrapper").$(byText("Male")).click();
+                    $("#userNumber").setValue("9998887766");
+                    $("#dateOfBirthInput").click();
+                    $(".react-datepicker__month-select").selectOption("January");
+                    $(".react-datepicker__year-select").selectOption("1999");
+                    $(".react-datepicker__month").$(byText("26")).click();
+                    $("#hobbiesWrapper").$(byText("Music")).click();
+                    $("#subjectsInput").click();
+                    $("#subjectsInput").setValue("Math").pressEnter();
+                    $("#uploadPicture").uploadFromClasspath("TestBox1.JPG");
+                    $("#currentAddress").setValue("address null");
+                    $("#state").scrollIntoView(true).click();
+                    //$("#state").click();
+                    $("#react-select-3-input").setValue("NCR").pressEnter();
+                    $("#city").click();
+                    $("#react-select-4-input").setValue("Delhi").pressEnter();
+                    $("#submit").click();
+                });
 
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Kotik Krasiviy"));
-        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("kotik@kotik.catq"));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9998887766"));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("26 January,1999"));
-        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Math"));
-        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Music"));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("TestBox1.JPG"));
-        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("address null"));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
+        step("Show results", () -> {
+            $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Kotik Krasiviy"));
+            $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("kotik@kotik.catq"));
+            $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
+            $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("9998887766"));
+            $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("26 January,1999"));
+            $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Math"));
+            $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Music"));
+            $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("TestBox1.JPG"));
+            $(".table-responsive").$(byText("Address")).parent().shouldHave(text("address null"));
+            $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
+        });
     }
 
     @AfterEach

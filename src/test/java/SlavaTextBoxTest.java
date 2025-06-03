@@ -24,7 +24,10 @@ public class SlavaTextBoxTest {
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         Configuration.browserSize = "1920x1080";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+
     }
+
     @Test
     void fillFormTest() {
         open("/automation-practice-form");
@@ -62,8 +65,15 @@ public class SlavaTextBoxTest {
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text("address null"));
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
     }
+
     @AfterEach
     void afterEach() {
         Selenide.closeWebDriver();
+    }
+    void addAttachments() {
+        helpers.Attach.screenshotAs("Last screenshot");
+        helpers.Attach.pageSource();
+        helpers.Attach.browserConsoleLogs();
+        helpers.Attach.addVideo();
     }
 }

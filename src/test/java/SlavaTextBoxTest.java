@@ -68,9 +68,6 @@ public class SlavaTextBoxTest {
     }
 
     @AfterEach
-    void afterEach() {
-        Selenide.closeWebDriver();
-    }
     void addAttachments() {
         helpers.Attach.screenshotAs("Last screenshot");
         helpers.Attach.pageSource();

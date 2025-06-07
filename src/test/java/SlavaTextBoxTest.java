@@ -24,6 +24,7 @@ public class SlavaTextBoxTest {
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.timeout = 10000;
         DesiredCapabilities capabilities = new DesiredCapabilities();
         Configuration.browserCapabilities = capabilities;
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -33,6 +34,11 @@ public class SlavaTextBoxTest {
         String browserName = System.getProperty("browserName", "chrome");
         String browserVersion = System.getProperty("browserVersion", "128.0");
         String windowSize = System.getProperty("windowSize", "1920x1080");
+
+        Configuration.browser = browserName;
+        Configuration.browserVersion = browserVersion;
+        Configuration.browserSize = windowSize;
+
         String selenoid = System.getProperty("selenoid", "selenoid.autotests.cloud");
         String login = System.getProperty("login", "user1");
         String password = System.getProperty("password", "1234");

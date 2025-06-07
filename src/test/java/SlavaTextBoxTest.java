@@ -24,18 +24,20 @@ public class SlavaTextBoxTest {
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browser = "chrome";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        Configuration.browserSize = "1920x1080";
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        Configuration.browserCapabilities = capabilities;
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
-        Configuration.browserCapabilities = capabilities;
+        String browserName = System.getProperty("browserName", "chrome");
+        String browserVersion = System.getProperty("browserVersion", "128.0");
+        String windowSize = System.getProperty("windowSize", "1920x1080");
+        String selenoid = System.getProperty("selenoid", "selenoid.autotests.cloud");
+        String login = System.getProperty("login", "user1");
+        String password = System.getProperty("password", "1234");
+        Configuration.remote = String.format("https://%s:%s@%s/wd/hub", login, password, selenoid);
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-
     }
 
     @Test

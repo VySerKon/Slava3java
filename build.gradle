@@ -33,6 +33,7 @@ dependencies {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
 
     testLogging {
         lifecycle {
@@ -48,10 +49,10 @@ task simple_test(type: Test) {
     }
 }
 
-test {
-    systemProperties = [
-            "selenide.browser": "chrome",
-            "webdriver.chrome.driver": "/usr/local/bin/chromedriver",
-            "selenide.headless": "true"
-    ]
-}
+//test {
+//    systemProperties = [
+//            "selenide.browser": "chrome",
+//            "webdriver.chrome.driver": "/usr/local/bin/chromedriver",
+//            "selenide.headless": "true"
+//    ]
+//}
